@@ -1,0 +1,86 @@
+<!-- 
+Pythonprogrammering för AI-utveckling mars VT25 - Inlämningsuppgift 1 - Blackjack med Flask
+cbolzoni@proton.me
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Inline styles as a fallback */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #007000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #fff;
+        }
+
+        .rules {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .rules h2 {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 5px;
+        }
+
+        .rules ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        .rules li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Blackjack</h1>
+        <div class="rules">
+            <h2>Game Rules:</h2>
+            <ul>
+                <li>The game is played with a standard deck of 52 cards.</li>
+                <li>Each player receives two cards at the beginning of the game.</li>
+                <li>The dealer only reveals one of their cards initially.</li>
+                <li>You can choose to take more cards (hit) or stay with your current cards (stand).</li>
+                <li>If you go over 21 points, you immediately lose (bust).</li>
+                <li>The dealer must hit until they reach at least 17 points.</li>
+                <li>If the dealer busts, you win.</li>
+                <li>If neither player busts, the one with the highest total wins.</li>
+            </ul>
+        </div>
+        <div class="start-game">
+            <a href="{{ url_for('new_game') }}" class="btn">Start New Game</a>
+        </div>
+    </div>
+</body>
+
+</html>

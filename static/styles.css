@@ -1,0 +1,231 @@
+/*
+Pythonprogrammering för AI-utveckling mars VT25 - Inlämningsuppgift 1 - Blackjack med Flask
+cbolzoni@proton.me
+*/
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #007000;
+    color: #fff;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    /* Center the headings */
+}
+
+/* Rules Section */
+.rules {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.rules h2 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+}
+
+.rules ul {
+    list-style-position: inside;
+    padding-left: 20px;
+}
+
+.rules li {
+    margin-bottom: 10px;
+}
+
+/* Start Game Button */
+.start-game {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Game Area */
+.game-area {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dealer-area,
+.player-area {
+    margin-bottom: 30px;
+}
+
+.dealer-area h2,
+.player-area h2 {
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fff;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+}
+
+.card {
+    position: relative;
+    width: 125px;
+    /* 250% of original 50px */
+    height: 175px;
+    /* 250% maintaining aspect ratio */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    /* Larger relative to card size */
+    transition: transform 0.2s ease;
+    margin: 10px;
+    padding: 0;
+    overflow: hidden;
+    /* Ensures the content doesn't overflow */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card colors by suit */
+.hearts,
+.diamonds {
+    color: #e61919;
+}
+
+.clubs,
+.spades,
+.back {
+    color: #000;
+}
+
+/* Message */
+.message {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    border: 3px solid #ffcc00;
+}
+
+.message h3 {
+    font-size: 2.8rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.win-message h3 {
+    color: #00ff00;
+    /* Bright green for wins */
+}
+
+.lose-message h3 {
+    color: #ff6b6b;
+    /* Coral red for losses */
+}
+
+.tie-message h3 {
+    color: #ffcc00;
+    /* Gold for ties */
+}
+
+/* Action Buttons */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn,
+a {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #ffcc00;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    margin: 10px;
+}
+
+.btn:hover,
+a:hover {
+    background-color: #e6b800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .cards {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        width: 150px;
+        height: 210px;
+        font-size: 7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn,
+    a {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .card {
+        width: 120px;
+        height: 168px;
+        font-size: 5rem;
+    }
+}

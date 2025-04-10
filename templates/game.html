@@ -1,0 +1,171 @@
+<!-- 
+Pythonprogrammering för AI-utveckling mars VT25 - Inlämningsuppgift 1 - Blackjack med Flask
+cbolzoni@proton.me
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Inline styles as a fallback */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #007000;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #fff;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .card {
+            width: 125px;
+            height: 175px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 120px;
+            margin: 10px;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .hearts,
+        .diamonds {
+            color: #e61919;
+        }
+
+        .clubs,
+        .spades,
+        .back {
+            color: #000;
+        }
+
+        .message {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 3px solid #ffcc00;
+        }
+
+        .message h3 {
+            font-size: 2.8rem;
+            margin: 0;
+        }
+
+        .win-message h3 {
+            color: #00ff00;
+        }
+
+        .lose-message h3 {
+            color: #ff6b6b;
+        }
+
+        .tie-message h3 {
+            color: #ffcc00;
+        }
+
+        a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ffcc00;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+
+        .dealer-area,
+        .player-area {
+            text-align: center;
+        }
+
+        .actions {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Blackjack</h1>
+
+        <div class="game-area">
+            <div class="dealer-area">
+                <h2>Dealer's Hand ({{ dealer_value }})</h2>
+                <div class="cards">
+                    {% for card in dealer_hand %}
+                    <div class="card {{ card.suit }}">
+                        {{ get_card_symbol(card) }}
+                    </div>
+                    {% endfor %}
+                    {% if not game_over and dealer_hand|length == 1 %}
+                    <div class="card back">
+                        {{ card_back }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="player-area">
+                <h2>Your Hand ({{ player_value }})</h2>
+                <div class="cards">
+                    {% for card in player_hand %}
+                    <div class="card {{ card.suit }}">
+                        {{ get_card_symbol(card) }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% if message %}
+            <div
+                class="message {% if 'win' in message|lower %}win-message{% elif 'dealer wins' in message|lower %}lose-message{% elif 'tie' in message|lower %}tie-message{% endif %}">
+                <h3>{{ message }}</h3>
+            </div>
+            {% endif %}
+
+            <div class="actions">
+                {% if not game_over %}
+                <a href="{{ url_for('hit') }}" class="btn">Hit</a>
+                <a href="{{ url_for('stand') }}" class="btn">Stand</a>
+                {% else %}
+                <a href="{{ url_for('new_game') }}" class="btn">New Game</a>
+                {% endif %}
+                <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
