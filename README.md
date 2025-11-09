@@ -1,4 +1,4 @@
-# Python Programming for AI Development March Spring Term 2025 - Assignment 1 - Blackjack with Flask
+# Blackjack with Flask
 
 ## ENGLISH TRANSLATION
 
